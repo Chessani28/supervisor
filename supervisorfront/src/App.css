@@ -1,0 +1,51 @@
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.scripts-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.script-item {
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.script-info {
+  display: flex;
+  align-items: center;
+}
+
+.script-name {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.script-actions .action-btn {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.restart-btn {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.start-btn {
+  background-color: #008CBA; /* Blue */
+  color: white;
+}
+
+.stop-btn {
+  background-color: #f44336; /* Red */
+  color: white;
+}
