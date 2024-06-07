@@ -1,0 +1,73 @@
+Instalación de Laravel en CentOS
+1. Actualiza los paquetes del sistema
+sudo yum update -y
+
+2. Instala EPEL y el repositorio Remi
+sudo yum install epel-release
+sudo yum install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+
+3. Instala Nginx y utilidades de Yum
+sudo yum install nginx yum-utils
+
+4. Habilita el repositorio Remi para PHP 7.2
+sudo yum-config-manager --enable remi-php72
+5. Instala PHP y extensiones necesarias
+sudo yum install php php-fpm php-mysql php-common php-xml php-mbstring php-json php-zip
+
+6. Instala MariaDB
+sudo yum install mariadb-server
+
+7. Instala otras herramientas necesarias
+sudo yum install firewalld sudo unzip
+
+8. Habilita e inicia Nginx
+sudo systemctl enable nginx
+sudo systemctl start nginx
+sudo systemctl status nginx
+
+9. Habilita e inicia FirewallD
+sudo systemctl enable firewalld
+sudo systemctl start firewalld
+sudo systemctl status firewalld
+
+10. Configura el Firewall
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --permanent --add-port=22/tcp
+sudo firewall-cmd --reload
+sudo iptables -L
+
+11. Habilita e inicia MariaDB
+sudo systemctl enable mariadb
+sudo systemctl start mariadb
+sudo systemctl status mariadb
+
+12. Configura MariaDB (Cambia la contraseña y ajusta configuraciones de seguridad)
+sudo /usr/bin/mysql_secure_installation
+
+13. Habilita e inicia PHP-FPM
+sudo systemctl enable php-fpm
+sudo systemctl start php-fpm
+sudo systemctl status php-fpm
+
+14. Instala Composer
+cd /tmp
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+php composer-setup.php
+sudo mv composer.phar /usr/local/bin/composer
+sudo chmod +x /usr/local/bin/composer
+
+15. Verifica la instalación de Composer y darle permisos a composer de ejecutarse
+sudo chmod 755 /usr/local/bin/composer
+composer --version
+
+16. Crea un proyecto Laravel
+cd /var/www/html/
+sudo /usr/local/bin/composer create-project --prefer-dist laravel/laravel sitiopruebas
+
+17. Para poder correr la apilicación de laravel pero sin bloquear la terminal es:
+php artisan serve --host=0.0.0.0 --port=8000 > /dev/null 2>&1 &
+
+18. Para ver si una api esta funcional se debe de poner 
+curl 127.0.0.1:8000/api/prueba
+

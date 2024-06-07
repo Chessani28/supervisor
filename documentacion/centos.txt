@@ -1,0 +1,63 @@
+Para instalar centos:
+Activar internet -> Ponemos en consola "nmtui" -> "Activar una conexion" -> "Activamos una" (para saber si hay conexión ponemos en consola "ping google.com") 
+
+* Ahora instalamos supervisor poniendo en consola lo siguiente:
+Instalamso dependencias -> sudo yum install epel-release
+Instalamos supervisor -> sudo yum install supervisor
+
+* Ahora iniciamos y habilitamos poniendo en consola:
+Habilitamos -> sudo systemctl enable supervisord
+Iniciamos -> sudo systemctl start supervisord
+
+Para poder ver los archivos:
+En consola ponemos "ip a"
+Entramos a WinScp creamos una nueva sesión
+Protocolo: SFTP
+Nombre o Ip del servidor: (La ip que salga en centos)
+Usuario: root
+Contraseña: (Constraseña del root)
+
+*Para instalar php:
+Instalamos dependencias -> sudo yum install epel-release
+Instalamos php -> sudo yum install php
+
+
+*Ahora entramos a WinScp y creamos 2 archivos, uno con extensión .ini o .conf y el otro con extensión .php
+Archivo php, este puede ser en cualquier dirección (Se puede poner en cualquiero carpeta)
+Archivo ini/conf, este debe de estar en directorio de "/etc/supervisord.d/nombreArchivo.ini"
+
+*Los hacemos ejecutables:
+Ejecutable el .ini y darle permiso -> sudo chmod 644 /etc/supervisord.d/script.ini
+Ejecutable el .php -> sudo chmod +x /var/www/html/script.php
+
+
+*Para cargar el archivo, recargar supervisor y aplicar cambios:
+Buscar archivos y recargar el .ini o .conf -> sudo supervisorctl reread
+Actualizar el ini/ conf -> sudo supervisorctl update
+Iniciar el archivo -> sudo supervisorctl start script
+Para ver si hay algún error -> sudo supervisorctl status
+
+*Ya para añadir un nuvo script es:
+En el archivo .ini debo de modificar añadiendo lo mismo pero con el otro archivo y el nombre diferente 
+Y creando el otro archivo con el mismo nombre añadido al .ini
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Configuaraciones para el sistema
+
+Cuando se modifique el .ini se debe de poner en consola:
+El primero lee los cambios y el segundo actualiza los cambios
+sudo supervisorctl update
+
+Para iniciar, detener y reiniciar un proceso en consola debo de poner:
+sudo supervisorctl start (nombreDelScript)
+sudo supervisorctl stop (nombreDelScript)
+sudo supervisorctl restart (nombreDelScript)
+
+Parar iniciar, detener y reiniciar los scripts pero de todos debes de poner en consola:
+sudo supervisorctl start all
+sudo supervisorctl stop all
+sudo supervisorctl update all
+
+Hay estados como el "BACKOFF", o el "FATAL", esto se debe a diferentes causas, lo que me paso a mi es que dejo de funcionar ya que había muchos procesos.

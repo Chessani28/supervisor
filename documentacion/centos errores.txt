@@ -1,0 +1,7 @@
+Errores que se fueron produciendo:
+script          FATAL Exited too quickly (process log may have details)
+
+*Esto paso cuando puse el comando de sudo supervisorctl status*
+(Esto pasaba porque simplemente con un echo"Hola"; me lo ciclaba infinitamente)
+Solución: Ponerle un sleep al comando "command=/bin/bash -c "sleep 10 && /bin/php /var/www/html/script.php""
+

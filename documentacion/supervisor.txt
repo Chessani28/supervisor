@@ -1,0 +1,10 @@
+Necesitamos 2 archivos: 
+
+.ini/.conf: Esto debe de estar en la ruta de "/etc/supervisord.d/"
+
+.php(extención del lenguaje que queramos): Este puede estar en la ruta que quieras, recomandable "/var/www/html/"
+
+Los logs se guardan en las rutas dadas en el .ini, pero normalmente es en "/var/log/supervisor/"
+Estos logs son salidas del script o errores del mismo php
+
+
